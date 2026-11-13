@@ -1,0 +1,123 @@
+:root {
+  --bg: #f4f6f9;
+  --panel: #ffffff;
+  --text: #1c2430;
+  --muted: #5f6b7a;
+  --border: #d7dde5;
+  --accent: #1f5fbf;
+  --accent-hover: #174a96;
+  --ok: #1d7a46;
+  --ok-bg: #e5f4ec;
+  --err: #b42318;
+  --err-bg: #fdecea;
+  --best: #fff7d6;
+  --ups: #5a3d1e;
+  --fedex: #4d148c;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14181f;
+    --panel: #1d232c;
+    --text: #e6eaf0;
+    --muted: #9aa5b4;
+    --border: #323b47;
+    --accent: #5b93e6;
+    --accent-hover: #7aa8ec;
+    --ok: #5fcf8d;
+    --ok-bg: #18301f;
+    --err: #ff8a80;
+    --err-bg: #3a1d1b;
+    --best: #3a3418;
+    --ups: #d7a76a;
+    --fedex: #b58cf0;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font: 15px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+header {
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+header h1 { font-size: 18px; margin: 0; }
+header nav { display: flex; gap: 16px; }
+header nav a { color: var(--muted); text-decoration: none; font-weight: 500; }
+header nav a.active, header nav a:hover { color: var(--accent); }
+main { max-width: 1040px; margin: 20px auto; padding: 0 16px; }
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+}
+.panel h2 { font-size: 16px; margin: 0 0 12px; }
+.panel h2 small { font-weight: 400; color: var(--muted); }
+.grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.two-col { display: grid; gap: 16px; grid-template-columns: 1fr 1fr; }
+@media (max-width: 760px) { .two-col { grid-template-columns: 1fr; } }
+label { display: block; font-size: 13px; color: var(--muted); }
+label.inline { display: flex; align-items: center; gap: 6px; color: var(--text); font-size: 14px; }
+input, select {
+  width: 100%;
+  margin-top: 4px;
+  padding: 7px 9px;
+  font: inherit;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+input[type=checkbox] { width: auto; margin: 0; }
+input:focus, select:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+button {
+  font: inherit;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+}
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+button.primary:hover { background: var(--accent-hover); }
+button:disabled { opacity: .6; cursor: wait; }
+button.link { border: none; background: none; color: var(--accent); padding: 4px; }
+.actions { display: flex; gap: 10px; align-items: center; margin-top: 12px; flex-wrap: wrap; }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { font-size: 12px; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
+td.num, th.num { text-align: right; white-space: nowrap; }
+#packages td { padding: 4px; border: none; }
+#packages input { margin: 0; }
+tr.best td { background: var(--best); }
+.carrier { font-weight: 600; }
+.carrier.UPS { color: var(--ups); }
+.carrier.FedEx { color: var(--fedex); }
+.muted { color: var(--muted); font-size: 13px; }
+.strike { text-decoration: line-through; color: var(--muted); font-size: 13px; margin-right: 6px; }
+.msg { padding: 8px 12px; border-radius: 6px; margin: 8px 0; }
+.msg.ok { background: var(--ok-bg); color: var(--ok); }
+.msg.err { background: var(--err-bg); color: var(--err); }
+.badge {
+  display: inline-block;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  margin-right: 6px;
+}
+.badge.on { border-color: var(--ok); color: var(--ok); }
+.badge.off { border-color: var(--err); color: var(--err); }
+.hidden { display: none; }
+.help { font-size: 13px; color: var(--muted); margin: 0 0 12px; }
+.help a { color: var(--accent); }

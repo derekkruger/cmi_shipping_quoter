@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CMI Shipping Quoter</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <h1>CMI Shipping Quoter</h1>
+  <nav>
+    <a href="/" class="active">Get a Quote</a>
+    <a href="/settings">Settings</a>
+  </nav>
+</header>
+<main>
+  <div id="carrier-status" class="panel">Loading carriers…</div>
+
+  <form id="quote-form" autocomplete="off">
+    <div class="two-col">
+      <section class="panel">
+        <h2>Ship from <small>(default from Settings)</small></h2>
+        <div class="grid">
+          <label>ZIP / Postal code<input name="o_postal_code" required></label>
+          <label>Country<input name="o_country_code" value="US" maxlength="2"></label>
+          <label>City<input name="o_city"></label>
+          <label>State<input name="o_state" maxlength="3"></label>
+        </div>
+      </section>
+      <section class="panel">
+        <h2>Ship to</h2>
+        <div class="grid">
+          <label>ZIP / Postal code<input name="d_postal_code" required autofocus></label>
+          <label>Country<input name="d_country_code" value="US" maxlength="2"></label>
+          <label>City<input name="d_city"></label>
+          <label>State<input name="d_state" maxlength="3"></label>
+        </div>
+        <div class="actions">
+          <label class="inline"><input type="checkbox" name="d_residential"> Residential address</label>
+        </div>
+      </section>
+    </div>
+
+    <section class="panel">
+      <h2>Packages</h2>
+      <table id="packages">
+        <thead>
+          <tr><th>Weight (lb)</th><th>Length (in)</th><th>Width (in)</th><th>Height (in)</th><th></th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div class="actions">
+        <button type="button" id="add-pkg">+ Add package</button>
+        <span style="flex:1"></span>
+        <button type="submit" class="primary" id="submit">Get quotes</button>
+      </div>
+    </section>
+  </form>
+
+  <section class="panel hidden" id="results-panel">
+    <h2>Rates <small id="results-summary"></small></h2>
+    <div id="errors"></div>
+    <table id="results">
+      <thead>
+        <tr>
+          <th>Carrier</th><th>Service</th><th class="num">Transit</th>
+          <th>Est. delivery</th><th class="num">Rate</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+</main>
+<script src="/static/app.js"></script>
+</body>
+</html>

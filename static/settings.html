@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quoter Settings</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <h1>CMI Shipping Quoter</h1>
+  <nav>
+    <a href="/">Get a Quote</a>
+    <a href="/settings" class="active">Settings</a>
+  </nav>
+</header>
+<main>
+  <form id="settings-form" autocomplete="off">
+    <section class="panel">
+      <h2>Default ship-from address</h2>
+      <div class="grid">
+        <label>Company<input name="origin.company"></label>
+        <label>Street address<input name="origin.address_line"></label>
+        <label>City<input name="origin.city"></label>
+        <label>State<input name="origin.state" maxlength="3"></label>
+        <label>ZIP / Postal code<input name="origin.postal_code"></label>
+        <label>Country<input name="origin.country_code" maxlength="2"></label>
+      </div>
+    </section>
+
+    <section class="panel" data-carrier="ups">
+      <h2>UPS <span class="badge" data-status></span></h2>
+      <p class="help">
+        Create an app at <a href="https://developer.ups.com/" target="_blank" rel="noopener">developer.ups.com</a>,
+        add the <b>Rating</b> API product, and copy the Client ID and Client Secret. The account number is your
+        6-character UPS shipper number.
+      </p>
+      <div class="grid">
+        <label class="inline"><input type="checkbox" name="carriers.ups.enabled"> Use UPS for quotes</label>
+        <label>Environment
+          <select name="carriers.ups.environment">
+            <option value="sandbox">Sandbox (testing)</option>
+            <option value="production">Production (live rates)</option>
+          </select>
+        </label>
+      </div>
+      <div class="grid" style="margin-top:12px">
+        <label>Client ID<input name="carriers.ups.client_id"></label>
+        <label>Client Secret<input name="carriers.ups.client_secret" type="password" placeholder="not set"></label>
+        <label>Account number<input name="carriers.ups.account_number"></label>
+      </div>
+      <div class="actions">
+        <label class="inline"><input type="checkbox" name="carriers.ups.negotiated_rates"> Request negotiated (account) rates</label>
+        <span style="flex:1"></span>
+        <button type="button" data-test="ups">Test connection</button>
+      </div>
+      <div data-result></div>
+    </section>
+
+    <section class="panel" data-carrier="fedex">
+      <h2>FedEx <span class="badge" data-status></span></h2>
+      <p class="help">
+        Create a project at <a href="https://developer.fedex.com/" target="_blank" rel="noopener">developer.fedex.com</a>,
+        enable the <b>Rates and Transit Times</b> API, and copy the API Key and Secret Key. The account number is your
+        9-digit FedEx account.
+      </p>
+      <div class="grid">
+        <label class="inline"><input type="checkbox" name="carriers.fedex.enabled"> Use FedEx for quotes</label>
+        <label>Environment
+          <select name="carriers.fedex.environment">
+            <option value="sandbox">Sandbox (testing)</option>
+            <option value="production">Production (live rates)</option>
+          </select>
+        </label>
+      </div>
+      <div class="grid" style="margin-top:12px">
+        <label>API Key (Client ID)<input name="carriers.fedex.client_id"></label>
+        <label>Secret Key (Client Secret)<input name="carriers.fedex.client_secret" type="password" placeholder="not set"></label>
+        <label>Account number<input name="carriers.fedex.account_number"></label>
+        <label>Pickup type
+          <select name="carriers.fedex.pickup_type">
+            <option value="DROPOFF_AT_FEDEX_LOCATION">Drop off at FedEx location</option>
+            <option value="CONTACT_FEDEX_TO_SCHEDULE">Schedule a pickup</option>
+            <option value="USE_SCHEDULED_PICKUP">Regular scheduled pickup</option>
+          </select>
+        </label>
+      </div>
+      <div class="actions">
+        <span style="flex:1"></span>
+        <button type="button" data-test="fedex">Test connection</button>
+      </div>
+      <div data-result></div>
+    </section>
+
+    <div class="actions" style="margin-bottom:32px">
+      <button type="submit" class="primary" id="save">Save settings</button>
+      <span id="save-msg"></span>
+    </div>
+  </form>
+  <p class="muted">
+    Settings are stored only on this PC in <code>data/settings.json</code>. Secrets are never shown again after saving;
+    leave a secret field blank to keep the saved value.
+  </p>
+</main>
+<script src="/static/settings.js"></script>
+</body>
+</html>
